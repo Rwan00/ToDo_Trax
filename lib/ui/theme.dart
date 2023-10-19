@@ -38,7 +38,7 @@ TextStyle get heading {
     fontWeight: FontWeight.bold,
     fontSize: 24,
     color:
-        Get.isDarkMode ? const Color(0xffCACACA) : Colors.black,
+        Get.isDarkMode ? const Color.fromRGBO(202, 202, 202, 1) : Colors.black,
   ));
 }
 TextStyle get subHeading {
@@ -48,4 +48,14 @@ TextStyle get subHeading {
     color:
          Color.fromRGBO(119, 119, 119, 1) ,
   ));
+}
+TextStyle get heading2 {
+  return GoogleFonts.roboto(
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+        color:
+        Get.isDarkMode ? const Color.fromRGBO(255, 255, 255, 1) : const Color
+            .fromRGBO(98, 98, 98, 1),
+      ));
 }

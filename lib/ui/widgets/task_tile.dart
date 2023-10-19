@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_trax/ui/theme.dart';
 
-class TaskTile extends StatelessWidget {
-  const TaskTile({super.key});
+class TaskTile extends StatefulWidget {
+   const TaskTile({super.key});
 
   @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      //padding: const EdgeInsets.symmetric(horizontal: 25),
-      height: 110,
+    return  Container(
+      //padding: const EdgeInsets.symmetric(vertical: 25),
+      height: 90,
       //margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xffBFBFBF),width: 0.3),
@@ -39,7 +44,7 @@ class TaskTile extends StatelessWidget {
                 "Salon UX",
                 style: heading,
               ),
-              const SizedBox(height: 15,),
+              const SizedBox(height: 6.5,),
               Row(
                 children: <Widget>[
                   const Icon(Icons.access_time_rounded,
@@ -53,7 +58,7 @@ class TaskTile extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 7,),
+              const SizedBox(height: 5.5,),
               Row(
                 children: <Widget>[
                   const SizedBox(width: 10,),
@@ -80,9 +85,9 @@ class TaskTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 37,),
+                const SizedBox(height: 28,),
                 Text("Completed",style: subHeading.copyWith(color: const Color.fromRGBO(20, 99, 0, 1)),),
-                const SizedBox(height: 16,),
+                //const SizedBox(height: 16,),
               ]
           )
         ],
