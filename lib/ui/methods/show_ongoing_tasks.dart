@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:get/get.dart';
-
-import '../widgets/task_tile.dart';
 
 Expanded showOngoingTasks(Widget widget) {
   return Expanded(
