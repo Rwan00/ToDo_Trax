@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 import '../methods/app_bar.dart';
 import '../methods/show_ongoing_tasks.dart';
 import '../methods/task_added_dialog.dart';
