@@ -59,3 +59,12 @@ TextStyle get heading2 {
             .fromRGBO(98, 98, 98, 1),
       ));
 }
+
+TextStyle get headingAddTask {
+  return GoogleFonts.roboto(
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        color: Color.fromRGBO(98, 98, 98, 1),
+      ));
+}
