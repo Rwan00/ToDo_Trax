@@ -65,6 +65,6 @@ TextStyle get headingAddTask {
       textStyle: const TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 20,
-        color: Color.fromRGBO(98, 98, 98, 1),
+        color: Color.fromRGBO(119, 119, 119, 1),
       ));
 }

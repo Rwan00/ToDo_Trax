@@ -26,7 +26,7 @@ class Ongoing extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               PageTransition(
                 child: const AddTaskView(),

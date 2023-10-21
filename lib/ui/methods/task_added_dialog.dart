@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../theme.dart';
 import '../views/ongoing_view.dart';
+import 'custom_container.dart';
 
 
 
@@ -44,7 +45,7 @@ void buildDialog(BuildContext context,
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                   context,
                   PageTransition(
                     child: const Ongoing(),
@@ -52,23 +53,7 @@ void buildDialog(BuildContext context,
                     duration: const Duration(milliseconds: 700),
                   ));
             },
-            child: Container(
-              width: 175,
-              height: 38,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                      color: const Color.fromRGBO(98, 98, 98, 1))),
-              child: Center(
-                child: Text(
-                  'Back',
-                  style: subHeading.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Get.isDarkMode? const Color.fromRGBO(166, 166, 166, 1) : const Color.fromRGBO(98, 98, 98, 1)),
-                ),
-              ),
-            ),
+            child: customContainer(text: "Back"),
           )
         ],
       ),
@@ -84,3 +69,5 @@ void buildDialog(BuildContext context,
     //barrierColor: Colors.orange.withOpacity(0.3)
   );
 }
+
+
