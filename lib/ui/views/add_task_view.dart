@@ -5,6 +5,8 @@ import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
 
 import '../methods/custom_container.dart';
+import '../methods/task_added_dialog.dart';
+import '../widgets/custom_button.dart';
 import '../widgets/input_field.dart';
 
 class AddTaskView extends StatefulWidget {
@@ -15,6 +17,8 @@ class AddTaskView extends StatefulWidget {
 }
 
 class _AddTaskViewState extends State<AddTaskView> {
+  bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,22 +134,68 @@ class _AddTaskViewState extends State<AddTaskView> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 24,),
-                  Text("Priority",style: headingAddTask.copyWith(fontSize: 16),),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Text(
+                    "Priority",
+                    style: headingAddTask.copyWith(fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(child: customContainer(text: "Low"))  ,
-
-                      Expanded(child: customContainer(text: "Medium"))  ,
-                      Expanded(child: customContainer(text: "High"))  ,
+                      Expanded(child: customContainer(text: "Low")),
+                      Expanded(child: customContainer(text: "Medium")),
+                      Expanded(child: customContainer(text: "High")),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(height: 24,),
+              const SizedBox(
+                height: 24,
+              ),
               const InputField(title: 'Description'),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
+                children: <Widget>[
+                  Text(
+                    "Reminder",
+                    style: headingAddTask.copyWith(fontSize: 16),
+                  ),
+                  const Spacer(),
+                  Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                    inactiveThumbColor:
+                        Get.isDarkMode ? dSecondaryClr : secondaryClr,
+                    inactiveTrackColor: Colors.grey,
+                    activeColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 70,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: MyButton("Create Task", () {
+                  buildDialog(
+                    context,
+                    imgUrl: 'assets/images/done.gif',
+                    titleTxt: 'Great Job',
+                    subTitleTxt: 'Your Task was added Successfully',
+                  );
+                }),
+              ),
             ],
           ),
         ),
