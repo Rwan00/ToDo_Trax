@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../services/theme_service.dart';
 import '../theme.dart';
+import '../widgets/custom_icon.dart';
 
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
@@ -19,48 +20,28 @@ AppBar buildAppBar(BuildContext context) {
           "Hello Friend",
           style: title,
         ),
-         const SizedBox(width: 4,),
-         SvgPicture.asset(
-             "assets/images/fluent_hand-wave.svg",
-           height: 15,
-         )
+        const SizedBox(
+          width: 4,
+        ),
+        SvgPicture.asset(
+          "assets/images/fluent_hand-wave.svg",
+          height: 15,
+        )
       ],
     ),
     actions: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 27.0),
-        child: Stack(children: [
-          Center(
-            child: Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                color: Get.isDarkMode? const Color.fromRGBO(44, 44, 44, 1) : const Color.fromRGBO(250, 250, 250, 1),
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 6,
-              ),
-              Center(
-                child: GestureDetector(
-                  onTap: () => ThemeServices().switchTheme(),
-                  child: SvgPicture.asset(
-                      Get.isDarkMode?"assets/images/mode-light.svg": "assets/images/mode-dark.svg",
-                    height: 18,
-                    colorFilter: ColorFilter.mode(
-                        Get.isDarkMode? const Color.fromRGBO(255, 199, 0, 1): const Color.fromRGBO(8, 33, 65, 1),
-                        BlendMode.srcIn
-                    ),
-                  )
-                ),
-              ),
-            ],
-          ),
-        ]),
+      GestureDetector(
+        onTap: () => ThemeServices().switchTheme(),
+        child: buildIcon(
+            imgUrl: Get.isDarkMode
+                ? "assets/images/mode-light.svg"
+                : "assets/images/mode-dark.svg",
+            containerClr: Get.isDarkMode
+                ? const Color.fromRGBO(44, 44, 44, 1)
+                : const Color.fromRGBO(250, 250, 250, 1),
+            iconClr: Get.isDarkMode
+                ? const Color.fromRGBO(255, 199, 0, 1)
+                : const Color.fromRGBO(8, 33, 65, 1), p: 0),
       ),
       //SizedBox(width: 27,)
     ],

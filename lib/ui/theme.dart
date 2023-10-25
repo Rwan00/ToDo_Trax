@@ -68,3 +68,35 @@ TextStyle get headingAddTask {
         color: Color.fromRGBO(119, 119, 119, 1),
       ));
 }
+TextStyle get headingOngoing {
+  return GoogleFonts.roboto(
+      textStyle:  TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 32,
+        color: Get.isDarkMode? const Color.fromRGBO(255, 255, 255, 1): const Color.fromRGBO(72, 72, 72, 1),
+      ));
+}
+TextStyle get txtOngoing1 {
+  return GoogleFonts.roboto(
+      textStyle:  TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        color: Get.isDarkMode? const Color.fromRGBO(166, 166, 166, 1): const Color.fromRGBO(106, 106, 106, 1),
+      ));
+}
+TextStyle get txtOngoing2 {
+  return GoogleFonts.roboto(
+      textStyle:  TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 24,
+        color: Get.isDarkMode? const Color.fromRGBO(227, 227, 227, 1): const Color.fromRGBO(64, 64, 64, 1),
+      ));
+}
+TextStyle get txtOngoing3 {
+  return GoogleFonts.roboto(
+      textStyle:  const TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+        color:  Color.fromRGBO(209, 209, 209, 1),
+      ));
+}

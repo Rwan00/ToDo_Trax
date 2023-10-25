@@ -14,7 +14,7 @@ Expanded showOngoingTasks(Widget widget) {
                 child: GestureDetector(
                   onTap: (){},
                   child:   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.only(top: 8.0,bottom: 8,right: 24),
                     child:  widget,
                   ),
                 ),

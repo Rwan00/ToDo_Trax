@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../theme.dart';
 import '../views/ongoing_view.dart';
 import 'custom_container.dart';
 
-
-
 void buildDialog(BuildContext context,
-    {required String imgUrl, required String titleTxt, required String subTitleTxt}) {
+    {required String imgUrl,
+    required String titleTxt,
+    required String subTitleTxt}) {
   final AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     backgroundColor: context.theme.colorScheme.background,
-
     content: SizedBox(
       height: 350,
       child: Column(
@@ -26,18 +24,22 @@ void buildDialog(BuildContext context,
           const SizedBox(
             height: 20,
           ),
-          Text(titleTxt,
-              style: heading2.copyWith(
-                  color: Get.isDarkMode
-                      ? const Color.fromRGBO(255, 255, 255, 1)
-                      : const Color.fromRGBO(35, 35, 35, 1))),
+          Text(
+            titleTxt,
+            style: heading2.copyWith(
+              color: Get.isDarkMode
+                  ? const Color.fromRGBO(255, 255, 255, 1)
+                  : const Color.fromRGBO(35, 35, 35, 1),
+            ),
+          ),
           const SizedBox(
             height: 12,
           ),
           Text(
             subTitleTxt,
             style: title.copyWith(
-                color: const Color.fromRGBO(119, 119, 119, 1)),
+              color: const Color.fromRGBO(119, 119, 119, 1),
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(
@@ -46,12 +48,11 @@ void buildDialog(BuildContext context,
           GestureDetector(
             onTap: () {
               Navigator.pushReplacement(
-                  context,
-                  PageTransition(
-                    child: const Ongoing(),
-                    type: PageTransitionType.fade,
-                    duration: const Duration(milliseconds: 700),
-                  ));
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return Ongoing();
+                }),
+              );
             },
             child: customContainer(text: "Back"),
           )
@@ -61,7 +62,7 @@ void buildDialog(BuildContext context,
   );
   showDialog(
     context: context,
-    builder: (BuildContext ctx) {
+    builder: (_) {
       return alert;
     },
     barrierDismissible: false,
@@ -69,5 +70,3 @@ void buildDialog(BuildContext context,
     //barrierColor: Colors.orange.withOpacity(0.3)
   );
 }
-
-

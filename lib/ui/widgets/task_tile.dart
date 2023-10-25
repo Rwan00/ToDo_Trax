@@ -68,16 +68,16 @@ class _TaskTileState extends State<TaskTile> {
               ),
             ],
           ),
-          const SizedBox(width: 120,),
+          const SizedBox(width: 110,),
           Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0, bottom: 7),
                   child: Container(
-                    width: 50,
-                    height: 18,
+                    width: 40,
+                    height: 19,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(8),
                         color: Get.isDarkMode? const Color.fromRGBO(169, 169, 169, 1):const Color.fromRGBO(242, 237, 237, 1)
                     ),
                     child: Center(
