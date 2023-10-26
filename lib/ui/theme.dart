@@ -100,3 +100,11 @@ TextStyle get txtOngoing3 {
         color:  Color.fromRGBO(209, 209, 209, 1),
       ));
 }
+TextStyle get txtHint {
+  return GoogleFonts.roboto(
+      textStyle:   TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+        color: Get.isDarkMode? const Color.fromRGBO(119, 119, 119, 1):const Color.fromRGBO(95, 94, 94, 1),
+      ));
+}

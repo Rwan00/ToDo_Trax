@@ -143,12 +143,12 @@ _noTaskMsg() {
               ),*/
               SvgPicture.asset(
                 "assets/images/noData.svg",
-                //height: 138,
-                width: 207,
+                height: 160,
+                width: 210,
                 semanticsLabel: "Task",
                 colorFilter: const ColorFilter.mode(
                     Color.fromRGBO(26, 115, 233, 1),
-                    BlendMode.srcIn),
+                    BlendMode.dst),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),

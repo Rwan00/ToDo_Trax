@@ -6,9 +6,10 @@ class InputField extends StatelessWidget {
   final String title;
   final TextEditingController? controller;
   final Widget? widget;
+  final String? hint;
 
   const InputField(
-      {required this.title, this.controller, this.widget, super.key});
+      {required this.title, this.controller, this.widget,this.hint, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,8 @@ class InputField extends StatelessWidget {
                 ),
                 cursorColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
                 decoration: InputDecoration(
+                  hintText: hint,
+                  hintStyle: txtHint,
                   suffixIcon: widget,
                   contentPadding: const EdgeInsets.only(left: 10, top: 10),
                   enabledBorder: const UnderlineInputBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
@@ -18,6 +19,17 @@ class AddTaskView extends StatefulWidget {
 
 class _AddTaskViewState extends State<AddTaskView> {
   bool isSwitched = false;
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  int _repeat = 0;
+  DateTime _selectedDate = DateTime.now();
+  List<String> purposeList = ["Work", "Personal", "Health", "Study","Family","Fitness","Travel","Shopping","Entertainment"];
+  String _selectedPurpose = "Work";
+  String _startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
+  String _endTime = DateFormat('hh:mm a')
+      .format(DateTime.now().add(const Duration(minutes: 15)))
+      .toString();
+  int _reminder = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +75,12 @@ class _AddTaskViewState extends State<AddTaskView> {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: ()=>_getDateFromUser(),
                     child: Row(
                       children: [
                         Text(
-                          "12 October",
+                          DateFormat('d MMMM').format(_selectedDate),
                           style: headingAddTask.copyWith(fontSize: 12),
-                        ),
-                        const SizedBox(
-                          width: 10,
                         ),
                         const Icon(
                           Icons.keyboard_arrow_down,
@@ -86,15 +95,42 @@ class _AddTaskViewState extends State<AddTaskView> {
               const SizedBox(
                 height: 8,
               ),
-              const InputField(title: 'Title'),
+              InputField(
+                title: 'Title',
+                controller: _titleController,
+              ),
               InputField(
                 title: 'Purpose',
-                widget: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
+                hint: _selectedPurpose,
+                widget: DropdownButton(
+                  dropdownColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
+                  borderRadius: BorderRadius.circular(10),
+                  items: purposeList
+                      .map<DropdownMenuItem<String>>(
+                          (value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(color: Colors.white),
+                          )))
+                      .toList(),
+                  style: headingAddTask.copyWith(
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
+                    fontSize: 16,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedPurpose = newValue!;
+                    });
+                  },
+                  icon:  const Icon(
                     Icons.keyboard_arrow_down,
-                    size: 20,
                     color: Color.fromRGBO(119, 119, 119, 1),
+                  ),
+                  iconSize: 16,
+                  elevation: 4,
+                  underline: Container(
+                    height: 0,
                   ),
                 ),
               ),
@@ -103,8 +139,9 @@ class _AddTaskViewState extends State<AddTaskView> {
                   Expanded(
                     child: InputField(
                       title: 'Start Time',
+                      hint: _startTime,
                       widget: IconButton(
-                        onPressed: () {},
+                        onPressed: () => _getTimeFromUser(isStartTime: true),
                         icon: const Icon(
                           Icons.access_time_rounded,
                           size: 20,
@@ -119,8 +156,9 @@ class _AddTaskViewState extends State<AddTaskView> {
                   Expanded(
                     child: InputField(
                       title: 'End Time',
+                      hint: _endTime,
                       widget: IconButton(
-                        onPressed: () {},
+                        onPressed: () => _getTimeFromUser(isStartTime: false),
                         icon: const Icon(
                           Icons.access_time_rounded,
                           size: 20,
@@ -131,33 +169,14 @@ class _AddTaskViewState extends State<AddTaskView> {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Text(
-                    "Priority",
-                    style: headingAddTask.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(child: customContainer(text: "Low")),
-                      Expanded(child: customContainer(text: "Medium")),
-                      Expanded(child: customContainer(text: "High")),
-                    ],
-                  ),
-                ],
-              ),
+              _repeatContainer(),
               const SizedBox(
                 height: 24,
               ),
-              const InputField(title: 'Description'),
+              InputField(
+                title: 'Description',
+                controller: _noteController,
+              ),
               const SizedBox(
                 height: 24,
               ),
@@ -173,6 +192,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                     onChanged: (value) {
                       setState(() {
                         isSwitched = value;
+                        _reminder = isSwitched? 1 : 0;
                       });
                     },
                     inactiveThumbColor:
@@ -201,5 +221,88 @@ class _AddTaskViewState extends State<AddTaskView> {
         ),
       ),
     );
+  }
+
+  _repeatContainer() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Text(
+            "Repeat",
+            style: headingAddTask.copyWith(fontSize: 16),
+          ),
+        ),
+        Row(
+            children: List.generate(
+          4,
+          (index) => Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _repeat = index;
+                });
+              },
+              child: customContainer(
+                  text: index == 0
+                      ? "Daily"
+                      : index == 1
+                          ? "Weekly"
+                          : index == 2
+                              ? "Monthly"
+                              : "None",
+                  color: _repeat == index
+                      ? Get.isDarkMode
+                          ? dPrimaryClr.withOpacity(0.8)
+                          : primaryClr.withOpacity(0.3)
+                      : null),
+            ),
+          ),
+        )),
+      ],
+    );
+  }
+
+  _getDateFromUser() async
+  {
+    DateTime? _pickedDate = await showDatePicker(
+      initialEntryMode: DatePickerEntryMode.input,
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2030),
+    );
+    if (_pickedDate != null) {
+      setState(() {
+        _selectedDate = _pickedDate;
+      });
+    } else {
+      print("IT'S NULL OR SOMETHING IS WRONG!!");
+    }
+  }
+
+  _getTimeFromUser({required bool isStartTime}) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: isStartTime
+          ? TimeOfDay.fromDateTime(DateTime.now())
+          : TimeOfDay.fromDateTime(
+          DateTime.now().add(const Duration(minutes: 15))),
+    );
+
+    String formattedTime = pickedTime!.format(context);
+
+    if (isStartTime) {
+      setState(() {
+        _startTime = formattedTime;
+      });
+    } else if (!isStartTime) {
+      setState(() {
+        _endTime = formattedTime;
+      });
+    } else {
+      print("IT'S NULL OR SOMETHING IS WRONG!!");
+    }
   }
 }
