@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:todo_trax/ui/views/your_tasks_view.dart';
 import '../methods/app_bar.dart';
+import '../methods/show_ongoing_tasks.dart';
 import '../theme.dart';
 import '../widgets/custom_icon.dart';
+import '../widgets/separator.dart';
+import '../widgets/ongoing_task_tile.dart';
 import 'add_task_view.dart';
 
 class Ongoing extends StatelessWidget {
@@ -12,6 +17,8 @@ class Ongoing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime myDate = DateTime.now();
+
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: buildAppBar(context),
@@ -40,7 +47,7 @@ class Ongoing extends StatelessWidget {
                         style: txtOngoing1,
                       ),
                       Text(
-                        "Monday",
+                        DateFormat.EEEE().format(myDate),
                         style: txtOngoing1.copyWith(
                             color: Get.isDarkMode ? dPrimaryClr : primaryClr),
                       ),
@@ -50,7 +57,7 @@ class Ongoing extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    "Oct,4,2023",
+                    DateFormat('MMM,d,y').format(myDate),
                     style: txtOngoing1.copyWith(fontSize: 12),
                   )
                 ],
@@ -59,24 +66,7 @@ class Ongoing extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  width: 6,
-                  height: 6,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color.fromRGBO(119, 119, 119, 1),
-                  ),
-                ),
-                Container(
-                  width: 258,
-                  height: 2.5,
-                  color: const Color.fromRGBO(119, 119, 119, 1),
-                ),
-              ],
-            ),
+            separator(),
             const SizedBox(
               height: 20,
             ),
@@ -88,7 +78,16 @@ class Ongoing extends StatelessWidget {
                 ),
                 const Spacer(),
                 GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                            child: const YourTasks(),
+                            type: PageTransitionType.rightToLeft,
+                            //alignment: Alignment.bottomLeft,
+                            duration: const Duration(milliseconds: 700),
+                          ));
+                    },
                     child: buildIcon(
                       imgUrl: "assets/images/calender.svg",
                       containerClr: Get.isDarkMode ? dPrimaryClr : primaryClr,
@@ -97,8 +96,8 @@ class Ongoing extends StatelessWidget {
                     )),
               ],
             ),
-            _noTaskMsg()
-            //showOngoingTasks(TaskTile()),
+            //_noTaskMsg()
+            showOngoingTasks(OngoingTaskTile()),
           ],
         ),
       ),

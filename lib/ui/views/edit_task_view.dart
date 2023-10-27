@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:todo_trax/ui/theme.dart';
-import 'package:todo_trax/ui/views/ongoing_view.dart';
+import 'package:todo_trax/ui/views/your_tasks_view.dart';
 
 import '../methods/custom_container.dart';
-import '../methods/task_added_dialog.dart';
+import '../theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/input_field.dart';
 
-class AddTaskView extends StatefulWidget {
-  const AddTaskView({super.key});
+class EditTaskView extends StatefulWidget {
+  const EditTaskView({super.key});
 
   @override
-  State<AddTaskView> createState() => _AddTaskViewState();
+  State<EditTaskView> createState() => _EditTaskViewState();
 }
 
-class _AddTaskViewState extends State<AddTaskView> {
+class _EditTaskViewState extends State<EditTaskView> {
   bool isSwitched = false;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
@@ -49,7 +48,7 @@ class _AddTaskViewState extends State<AddTaskView> {
         elevation: 0,
         backgroundColor: context.theme.colorScheme.background,
         title: Text(
-          "Create New Task",
+          "Edit Task",
           style: heading2,
         ),
         centerTitle: true,
@@ -58,8 +57,8 @@ class _AddTaskViewState extends State<AddTaskView> {
             Navigator.pushReplacement(
                 context,
                 PageTransition(
-                  child: const Ongoing(),
-                  type: PageTransitionType.topToBottom,
+                  child: const YourTasks(),
+                  type: PageTransitionType.leftToRight,
                   //alignment: Alignment.bottomLeft,
                   duration: const Duration(milliseconds: 700),
                 ));
@@ -67,7 +66,7 @@ class _AddTaskViewState extends State<AddTaskView> {
           color: const Color.fromRGBO(167, 167, 167, 1),
           icon: const Icon(
             Icons.clear_rounded,
-            size: 32,
+            size: 24,
           ),
         ),
       ),
@@ -118,11 +117,11 @@ class _AddTaskViewState extends State<AddTaskView> {
                   items: purposeList
                       .map<DropdownMenuItem<String>>(
                           (value) => DropdownMenuItem(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(color: Colors.white),
-                              )))
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(color: Colors.white),
+                          )))
                       .toList(),
                   style: headingAddTask.copyWith(
                     color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -206,7 +205,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                       });
                     },
                     inactiveThumbColor:
-                        Get.isDarkMode ? dSecondaryClr : secondaryClr,
+                    Get.isDarkMode ? dSecondaryClr : secondaryClr,
                     inactiveTrackColor: Colors.grey,
                     activeColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
                   ),
@@ -217,32 +216,12 @@ class _AddTaskViewState extends State<AddTaskView> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: MyButton("Create Task", () {
-                  if ((_titleController.text.isNotEmpty &&
-                          !_titleController.text.isNum) &&
-                      (_noteController.text.isNotEmpty &&
-                          !_noteController.text.isNum)) {
-                    buildDialog(
-                      context,
-                      imgUrl: 'assets/images/done.gif',
-                      titleTxt: 'Great Job',
-                      subTitleTxt: 'Your Task was added Successfully',
-                    );
-                  } else if (_titleController.text.isEmpty ||
-                      _noteController.text.isEmpty) {
-                    null;
-                  } else {
-                    print("############SOMETHING BAD HAPPENED##########");
-                  }
+                child: MyButton("Edit", () {
+                  Get.back();
                 },
-                   clr: _titleController.text.isEmpty ||
-                            _noteController.text.isEmpty
-                        ? const Color.fromRGBO(184, 184, 184, 1)
-                        : Get.isDarkMode
-                            ? dPrimaryClr
-                            : primaryClr),
+                  clr: Get.isDarkMode? dPrimaryClr:primaryClr,
               ),
-            ],
+              ),],
           ),
         ),
       ),
@@ -262,30 +241,30 @@ class _AddTaskViewState extends State<AddTaskView> {
         ),
         Row(
             children: List.generate(
-          4,
-          (index) => Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _repeat = index;
-                });
-              },
-              child: customContainer(
-                  text: index == 0
-                      ? "Daily"
-                      : index == 1
+              4,
+                  (index) => Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _repeat = index;
+                    });
+                  },
+                  child: customContainer(
+                      text: index == 0
+                          ? "Daily"
+                          : index == 1
                           ? "Weekly"
                           : index == 2
-                              ? "Monthly"
-                              : "None",
-                  color: _repeat == index
-                      ? Get.isDarkMode
+                          ? "Monthly"
+                          : "None",
+                      color: _repeat == index
+                          ? Get.isDarkMode
                           ? dPrimaryClr.withOpacity(0.8)
                           : primaryClr.withOpacity(0.3)
-                      : null),
-            ),
-          ),
-        )),
+                          : null),
+                ),
+              ),
+            )),
       ],
     );
   }
@@ -313,7 +292,7 @@ class _AddTaskViewState extends State<AddTaskView> {
       initialTime: isStartTime
           ? TimeOfDay.fromDateTime(DateTime.now())
           : TimeOfDay.fromDateTime(
-              DateTime.now().add(const Duration(minutes: 15))),
+          DateTime.now().add(const Duration(minutes: 15))),
     );
 
     String formattedTime = pickedTime!.format(context);

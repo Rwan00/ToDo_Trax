@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../theme.dart';
 import '../views/ongoing_view.dart';
@@ -13,7 +14,7 @@ void buildDialog(BuildContext context,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     backgroundColor: context.theme.colorScheme.background,
     content: SizedBox(
-      height: 350,
+      height: 400,
       child: Column(
         children: <Widget>[
           Image.asset(
@@ -46,13 +47,16 @@ void buildDialog(BuildContext context,
             height: 42,
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Ongoing();
-                }),
-              );
+            onTap: () async{
+              Get.back();
+             await Navigator.pushReplacement(
+                 context,
+                 PageTransition(
+                   child: const Ongoing(),
+                   type: PageTransitionType.fade,
+                   duration: const Duration(milliseconds: 700),
+                 ));
+
             },
             child: customContainer(text: "Back"),
           )

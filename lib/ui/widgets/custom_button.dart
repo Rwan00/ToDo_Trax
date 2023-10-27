@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import '../theme.dart';
 
 class MyButton extends StatelessWidget {
-
   final String label;
   final Function() onTap;
+  final Color? clr;
 
-  const MyButton(this.label,this.onTap,{super.key});
+  const MyButton(this.label, this.onTap, {this.clr, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,14 @@ class MyButton extends StatelessWidget {
         height: 48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Get.isDarkMode? dPrimaryClr : primaryClr,
+          color: clr,
         ),
-        child: Text(label,style: GoogleFonts.roboto(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
+        child: Text(
+          label,
+          style: GoogleFonts.roboto(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

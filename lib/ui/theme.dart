@@ -108,3 +108,35 @@ TextStyle get txtHint {
         color: Get.isDarkMode? const Color.fromRGBO(119, 119, 119, 1):const Color.fromRGBO(95, 94, 94, 1),
       ));
 }
+TextStyle get txtTask1 {
+  return GoogleFonts.roboto(
+      textStyle:   TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        color: Get.isDarkMode? const Color.fromRGBO(174, 174, 174, 1):const Color.fromRGBO(98, 98, 98, 1),
+      ));
+}
+TextStyle get txtTask2 {
+  return GoogleFonts.roboto(
+      textStyle:   const TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 8,
+        color:  Color.fromRGBO(174, 174, 174, 1),
+      ));
+}
+TextStyle get txtTask3 {
+  return GoogleFonts.roboto(
+      textStyle:   const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 10,
+        color:  Color.fromRGBO(98, 98, 98, 1),
+      ));
+}
+TextStyle get txtDes1 {
+  return GoogleFonts.roboto(
+      textStyle:    TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 24,
+        color:  Get.isDarkMode? const Color.fromRGBO(255, 255, 255, 1) : const Color.fromRGBO(61, 61, 63, 1),
+      ));
+}
