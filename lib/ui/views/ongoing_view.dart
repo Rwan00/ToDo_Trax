@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:todo_trax/ui/views/splash_view.dart';
 import 'package:todo_trax/ui/views/your_tasks_view.dart';
 import '../methods/app_bar.dart';
 import '../methods/show_ongoing_tasks.dart';
@@ -80,10 +79,10 @@ class Ongoing extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           PageTransition(
-                            child: const AddTaskView(),
+                            child: const YourTasks(),
                             type: PageTransitionType.rightToLeft,
                             //alignment: Alignment.bottomLeft,
                             duration: const Duration(milliseconds: 700),
@@ -104,10 +103,10 @@ class Ongoing extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               PageTransition(
-                child: const SplashScreen(),
+                child: const AddTaskView(),
                 type: PageTransitionType.bottomToTop,
                 alignment: Alignment.bottomLeft,
                 duration: const Duration(milliseconds: 700),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
 
