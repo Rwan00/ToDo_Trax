@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:todo_trax/services/theme_service.dart';
 import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
+import 'package:todo_trax/ui/views/splash_view.dart';
 
 void main() async{
 
@@ -22,7 +23,7 @@ class ToDoTrax extends StatelessWidget {
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeServices().theme,
-      home: const Ongoing(),
+      home:  const SplashScreen(),
     );
   }
 }

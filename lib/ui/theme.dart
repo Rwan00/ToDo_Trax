@@ -140,3 +140,11 @@ TextStyle get txtDes1 {
         color:  Get.isDarkMode? const Color.fromRGBO(255, 255, 255, 1) : const Color.fromRGBO(61, 61, 63, 1),
       ));
 }
+TextStyle get txtSplash {
+  return GoogleFonts.fugazOne(
+      textStyle:    const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 60,
+        color:   Color.fromRGBO(58, 58, 58, 1),
+      ));
+}
