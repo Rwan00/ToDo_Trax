@@ -7,12 +7,15 @@ import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
 import 'package:todo_trax/ui/views/splash_view.dart';
 
+import 'models/task.dart';
+
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Hive.initFlutter();
   await Hive.openBox("notes_box");
+  Hive.registerAdapter(TaskAdapter());
   runApp(const ToDoTrax());
 }
 

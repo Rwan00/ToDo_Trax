@@ -9,7 +9,7 @@ class InputField extends StatelessWidget {
   final String? hint;
 
   const InputField(
-      {required this.title, this.controller, this.widget,this.hint, super.key});
+      {required this.title, this.controller, this.widget,this.hint,super.key});
 
   @override
   Widget build(BuildContext context) {

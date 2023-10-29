@@ -40,37 +40,11 @@ class _AddTaskViewState extends State<AddTaskView> {
       .format(DateTime.now().add(const Duration(minutes: 15)))
       .toString();
   int _reminder = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: context.theme.colorScheme.background,
-        title: Text(
-          "Create New Task",
-          style: heading2,
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                PageTransition(
-                  child: const Ongoing(),
-                  type: PageTransitionType.topToBottom,
-                  //alignment: Alignment.bottomLeft,
-                  duration: const Duration(milliseconds: 700),
-                ));
-          },
-          color: const Color.fromRGBO(167, 167, 167, 1),
-          icon: const Icon(
-            Icons.clear_rounded,
-            size: 32,
-          ),
-        ),
-      ),
+      appBar: addTaskAppBar(context),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: SingleChildScrollView(
@@ -244,6 +218,35 @@ class _AddTaskViewState extends State<AddTaskView> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  AppBar addTaskAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: context.theme.colorScheme.background,
+      title: Text(
+        "Create New Task",
+        style: heading2,
+      ),
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+              context,
+              PageTransition(
+                child: const Ongoing(),
+                type: PageTransitionType.topToBottom,
+                //alignment: Alignment.bottomLeft,
+                duration: const Duration(milliseconds: 700),
+              ));
+        },
+        color: const Color.fromRGBO(167, 167, 167, 1),
+        icon: const Icon(
+          Icons.clear_rounded,
+          size: 32,
         ),
       ),
     );
