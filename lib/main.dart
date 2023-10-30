@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:todo_trax/cubits/add_task_cubit.dart';
 import 'package:todo_trax/services/theme_service.dart';
 import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
@@ -24,12 +26,17 @@ class ToDoTrax extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Themes.light,
-      darkTheme: Themes.dark,
-      themeMode: ThemeServices().theme,
-      home:  const SplashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AddTaskCubit()),
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: Themes.light,
+        darkTheme: Themes.dark,
+        themeMode: ThemeServices().theme,
+        home:  const SplashScreen(),
+      ),
     );
   }
 }

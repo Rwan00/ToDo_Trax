@@ -52,7 +52,7 @@ class _YourTasksState extends State<YourTasks> {
             height: 35,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: Color.fromRGBO(167, 167, 167, 1))),
+                border: Border.all(color: const Color.fromRGBO(167, 167, 167, 1))),
             child: const Icon(
               Icons.arrow_back,
               size: 24,

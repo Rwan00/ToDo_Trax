@@ -5,7 +5,7 @@ import '../theme.dart';
 
 Padding customContainer({required String text,color}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 16.0),
+    padding:  const EdgeInsets.only(left: 16.0),
     child: Container(
       width: 175,
       height: 38,
