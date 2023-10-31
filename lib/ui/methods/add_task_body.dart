@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_trax/cubits/add_task_cubit.dart';
+import 'package:todo_trax/cubits/add_task_cubit/add_task_cubit.dart';
 import 'package:todo_trax/ui/methods/task_added_dialog.dart';
 
 import '../../models/task.dart';
@@ -185,35 +185,41 @@ class _AddTaskBodyState extends State<AddTaskBody> {
         ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: MyButton("Create Task", () {
-            if ((_titleController.text.isNotEmpty &&
+          child: BlocBuilder<AddTaskCubit,AddTaskState>(
+            builder: (BuildContext context, state) {
+              return MyButton("Create Task", () {
+                if ((_titleController.text.isNotEmpty &&
                     !_titleController.text.isNum) &&
-                (_noteController.text.isNotEmpty &&
-                    !_noteController.text.isNum)) {
-              Task task = Task(
-                  title: _titleController.text.toString(),
-                  purpose: _getPurpose(_selectedPurpose),
-                  date: DateFormat.yMd().format(_selectedDate),
-                  startTime: _startTime,
-                  endTime: _endTime,
-                  repeat: _repeat,
-                  description: _noteController.text.toString(),
-                  reminder: _reminder,
-                  isCompleted: 0);
-              BlocProvider.of<AddTaskCubit>(context).addTask(task);
+                    (_noteController.text.isNotEmpty &&
+                        !_noteController.text.isNum)) {
+                  Task task = Task(
+                      title: _titleController.text.toString(),
+                      purpose: _getPurpose(_selectedPurpose),
+                      date: DateFormat.yMd().format(_selectedDate),
+                      startTime: _startTime,
+                      endTime: _endTime,
+                      repeat: _repeat,
+                      description: _noteController.text.toString(),
+                      reminder: _reminder,
+                      isCompleted: 0);
+                  BlocProvider.of<AddTaskCubit>(context).addTask(task);
 
-            } else if (_titleController.text.isEmpty ||
-                _noteController.text.isEmpty) {
-              null;
-            } else {
-              print("############SOMETHING BAD HAPPENED##########");
-            }
-          },
-              clr: _titleController.text.isEmpty || _noteController.text.isEmpty
-                  ? const Color.fromRGBO(184, 184, 184, 1)
-                  : Get.isDarkMode
-                      ? dPrimaryClr
-                      : primaryClr),
+                } else if (_titleController.text.isEmpty ||
+                    _noteController.text.isEmpty) {
+                  null;
+                } else {
+                  print("############SOMETHING BAD HAPPENED##########");
+                }
+              },
+                clr: _titleController.text.isEmpty || _noteController.text.isEmpty
+                    ? const Color.fromRGBO(184, 184, 184, 1)
+                    : Get.isDarkMode
+                    ? dPrimaryClr
+                    : primaryClr,
+                isLoading: state is AddTaskLoading ? true : false,
+              );
+            },
+          ),
         ),
       ],
     );

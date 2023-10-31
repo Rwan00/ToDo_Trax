@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:todo_trax/cubits/add_task_cubit.dart';
+import 'package:todo_trax/cubits/add_task_cubit/add_task_cubit.dart';
 import 'package:todo_trax/services/theme_service.dart';
 import 'package:todo_trax/simple_bloc_observer.dart';
 import 'package:todo_trax/ui/theme.dart';
@@ -19,7 +19,7 @@ void main() async{
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TaskAdapter());
-  await Hive.openBox("notes_box");
+  await Hive.openBox<Task>("notes_box");
   runApp(const ToDoTrax());
 }
 
@@ -28,17 +28,12 @@ class ToDoTrax extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AddTaskCubit()),
-      ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: Themes.light,
-        darkTheme: Themes.dark,
-        themeMode: ThemeServices().theme,
-        home:  const SplashScreen(),
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: Themes.light,
+      darkTheme: Themes.dark,
+      themeMode: ThemeServices().theme,
+      home:  const SplashScreen(),
     );
   }
 }

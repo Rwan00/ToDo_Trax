@@ -9,8 +9,9 @@ class MyButton extends StatelessWidget {
   final Function() onTap;
   final Color? clr;
 
-  const MyButton(this.label, this.onTap, {this.clr, super.key});
+  const MyButton(this.label, this.onTap, {this.clr,this.isLoading = false, super.key});
 
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,7 +24,13 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: clr,
         ),
-        child: Text(
+        child: isLoading?  SizedBox(
+          height: 20,
+          width: 15,
+          child: CircularProgressIndicator(
+            color: Get.isDarkMode? dPrimaryClr: primaryClr,
+          ),
+        ):Text(
           label,
           style: GoogleFonts.roboto(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),

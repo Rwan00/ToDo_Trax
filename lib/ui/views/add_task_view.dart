@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:todo_trax/cubits/add_task_cubit.dart';
+import 'package:todo_trax/cubits/add_task_cubit/add_task_cubit.dart';
 import 'package:todo_trax/ui/methods/add_task_body.dart';
 import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
@@ -26,36 +24,39 @@ class _AddTaskViewState extends State<AddTaskView> {
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: addTaskAppBar(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        child:  BlocConsumer<AddTaskCubit,AddTaskState>(
-            listener: (BuildContext context, Object? state) {
-              /*if(state is AddTaskLoading)
-                {
-                  isLoading = true;
-                }*/
-              if(state is AddTaskFailure)
-                {
-                  print("FAIL ${state.errorMsg}");
-                }
-              if(state is AddTaskSuccess)
-                {
-                  buildDialog(
-                    context,
-                    imgUrl: 'assets/images/done.gif',
-                    titleTxt: 'Great Job',
-                    subTitleTxt: 'Your Task was added Successfully',
-                  );
-                  //Get.back();
-                }
-            },
-            builder: (BuildContext context, state) {
-              return ModalProgressHUD(
-                inAsyncCall: state is AddTaskLoading ? true : false,
-                  child: const SingleChildScrollView(child: AddTaskBody())
-              );
-            },
-            ),
+      body: BlocProvider(
+
+        create: (BuildContext context)=> AddTaskCubit(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child:  BlocConsumer<AddTaskCubit,AddTaskState>(
+              listener: (BuildContext context, Object? state) {
+                /*if(state is AddTaskLoading)
+                  {
+                    isLoading = true;
+                  }*/
+                if(state is AddTaskFailure)
+                  {
+                    debugPrint("FAIL ${state.errorMsg}");
+                  }
+                if(state is AddTaskSuccess)
+                  {
+                    buildDialog(
+                      context,
+                      imgUrl: 'assets/images/done.gif',
+                      titleTxt: 'Great Job',
+                      subTitleTxt: 'Your Task was added Successfully',
+                    );
+                    //Get.back();
+                  }
+              },
+              builder: (BuildContext context, state) {
+                return AbsorbPointer(
+                  absorbing: state is AddTaskLoading? true : false,
+                  child: const SingleChildScrollView(child: AddTaskBody()));
+              },
+              ),
+        ),
       ),
     );
   }

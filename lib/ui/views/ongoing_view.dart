@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:todo_trax/ui/views/your_tasks_view.dart';
+import '../../cubits/read_tasks_cubit/read_task_cubit.dart';
 import '../methods/app_bar.dart';
 import '../methods/show_ongoing_tasks.dart';
 import '../theme.dart';
@@ -97,7 +99,10 @@ class Ongoing extends StatelessWidget {
               ],
             ),
             //_noTaskMsg()
-            showOngoingTasks(OngoingTaskTile()),
+            BlocProvider(
+              create: (context)=> TasksCubit(),
+                child: showOngoingTasks(OngoingTaskTile())
+            ),
           ],
         ),
       ),
