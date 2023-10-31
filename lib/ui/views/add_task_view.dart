@@ -28,36 +28,34 @@ class _AddTaskViewState extends State<AddTaskView> {
       appBar: addTaskAppBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        child:  SingleChildScrollView(
-          child: BlocConsumer<AddTaskCubit,AddTaskState>(
-              listener: (BuildContext context, Object? state) {
-                /*if(state is AddTaskLoading)
-                  {
-                    isLoading = true;
-                  }*/
-                if(state is AddTaskFailure)
-                  {
-                    print("FAIL ${state.errorMsg}");
-                  }
-                if(state is AddTaskSuccess)
-                  {
-                    buildDialog(
-                      context,
-                      imgUrl: 'assets/images/done.gif',
-                      titleTxt: 'Great Job',
-                      subTitleTxt: 'Your Task was added Successfully',
-                    );
-                    //Get.back();
-                  }
-              },
-              builder: (BuildContext context, state) {
-                return ModalProgressHUD(
-                  inAsyncCall: state is AddTaskLoading ? true : false,
-                    child: const AddTaskBody()
-                );
-              },
-              ),
-        ),
+        child:  BlocConsumer<AddTaskCubit,AddTaskState>(
+            listener: (BuildContext context, Object? state) {
+              /*if(state is AddTaskLoading)
+                {
+                  isLoading = true;
+                }*/
+              if(state is AddTaskFailure)
+                {
+                  print("FAIL ${state.errorMsg}");
+                }
+              if(state is AddTaskSuccess)
+                {
+                  buildDialog(
+                    context,
+                    imgUrl: 'assets/images/done.gif',
+                    titleTxt: 'Great Job',
+                    subTitleTxt: 'Your Task was added Successfully',
+                  );
+                  //Get.back();
+                }
+            },
+            builder: (BuildContext context, state) {
+              return ModalProgressHUD(
+                inAsyncCall: state is AddTaskLoading ? true : false,
+                  child: const SingleChildScrollView(child: AddTaskBody())
+              );
+            },
+            ),
       ),
     );
   }

@@ -26,16 +26,16 @@ class Task extends HiveObject{
   int? isCompleted;
 
   Task({
-    this.id,
-    this.title,
-    this.purpose,
-    this.date,
-    this.startTime,
-    this.endTime,
-    this.repeat,
-    this.description,
-    this.reminder,
-    this.isCompleted,
+     this.id,
+    required this.title,
+    required this.purpose,
+    required this.date,
+    required this.startTime,
+    required this.endTime,
+    required this.repeat,
+    required this.description,
+    required this.reminder,
+    required this.isCompleted,
 });
 }
 

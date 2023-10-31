@@ -17,13 +17,14 @@ class AddTaskCubit extends Cubit<AddTaskState>
     try{
       var tasksBox = Hive.box("notes_box");
       //isLoading = false;
-      emit(AddTaskSuccess());
+
       await tasksBox.add(task);
+      emit(AddTaskSuccess());
     }
     catch(e)
     {
       //isLoading= false;
-      AddTaskFailure(e.toString());
+      emit(AddTaskFailure(e.toString()));
     }
 
   }

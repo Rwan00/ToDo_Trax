@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_trax/cubits/add_task_cubit.dart';
 import 'package:todo_trax/ui/methods/task_added_dialog.dart';
 
+import '../../models/task.dart';
 import '../theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/input_field.dart';
@@ -83,8 +86,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
             dropdownColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
             borderRadius: BorderRadius.circular(10),
             items: purposeList
-                .map<DropdownMenuItem<String>>(
-                    (value) => DropdownMenuItem(
+                .map<DropdownMenuItem<String>>((value) => DropdownMenuItem(
                     value: value,
                     child: Text(
                       value,
@@ -172,8 +174,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                   _reminder = isSwitched ? 1 : 0;
                 });
               },
-              inactiveThumbColor:
-              Get.isDarkMode ? dSecondaryClr : secondaryClr,
+              inactiveThumbColor: Get.isDarkMode ? dSecondaryClr : secondaryClr,
               inactiveTrackColor: Colors.grey,
               activeColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
             ),
@@ -186,9 +187,20 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           alignment: Alignment.bottomCenter,
           child: MyButton("Create Task", () {
             if ((_titleController.text.isNotEmpty &&
-                !_titleController.text.isNum) &&
+                    !_titleController.text.isNum) &&
                 (_noteController.text.isNotEmpty &&
                     !_noteController.text.isNum)) {
+              Task task = Task(
+                  title: _titleController.text.toString(),
+                  purpose: _getPurpose(_selectedPurpose),
+                  date: DateFormat.yMd().format(_selectedDate),
+                  startTime: _startTime,
+                  endTime: _endTime,
+                  repeat: _repeat,
+                  description: _noteController.text.toString(),
+                  reminder: _reminder,
+                  isCompleted: 0);
+              BlocProvider.of<AddTaskCubit>(context).addTask(task);
 
             } else if (_titleController.text.isEmpty ||
                 _noteController.text.isEmpty) {
@@ -197,12 +209,11 @@ class _AddTaskBodyState extends State<AddTaskBody> {
               print("############SOMETHING BAD HAPPENED##########");
             }
           },
-              clr: _titleController.text.isEmpty ||
-                  _noteController.text.isEmpty
+              clr: _titleController.text.isEmpty || _noteController.text.isEmpty
                   ? const Color.fromRGBO(184, 184, 184, 1)
                   : Get.isDarkMode
-                  ? dPrimaryClr
-                  : primaryClr),
+                      ? dPrimaryClr
+                      : primaryClr),
         ),
       ],
     );
@@ -221,30 +232,30 @@ class _AddTaskBodyState extends State<AddTaskBody> {
         ),
         Row(
             children: List.generate(
-              4,
-                  (index) => Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _repeat = index;
-                    });
-                  },
-                  child: customContainer(
-                      text: index == 0
-                          ? "Daily"
-                          : index == 1
+          4,
+          (index) => Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _repeat = index;
+                });
+              },
+              child: customContainer(
+                  text: index == 0
+                      ? "Daily"
+                      : index == 1
                           ? "Weekly"
                           : index == 2
-                          ? "Monthly"
-                          : "None",
-                      color: _repeat == index
-                          ? Get.isDarkMode
+                              ? "Monthly"
+                              : "None",
+                  color: _repeat == index
+                      ? Get.isDarkMode
                           ? dPrimaryClr.withOpacity(0.8)
                           : primaryClr.withOpacity(0.3)
-                          : null),
-                ),
-              ),
-            )),
+                      : null),
+            ),
+          ),
+        )),
       ],
     );
   }
@@ -272,7 +283,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
       initialTime: isStartTime
           ? TimeOfDay.fromDateTime(DateTime.now())
           : TimeOfDay.fromDateTime(
-          DateTime.now().add(const Duration(minutes: 15))),
+              DateTime.now().add(const Duration(minutes: 15))),
     );
 
     String formattedTime = pickedTime!.format(context);
@@ -287,6 +298,31 @@ class _AddTaskBodyState extends State<AddTaskBody> {
       });
     } else {
       print("IT'S NULL OR SOMETHING IS WRONG!!");
+    }
+  }
+
+  _getPurpose(String? purpose) {
+    switch (purpose) {
+      case "Work":
+        return 0;
+      case "Personal":
+        return 1;
+      case "Health":
+        return 2;
+      case "Study":
+        return 3;
+        case  "Family":
+        return 4;
+        case "Fitness":
+        return 5;
+        case "Travel":
+        return 6;
+        case "Shopping":
+        return 7;
+        case "Entertainment":
+        return 8;
+      default:
+        return 0;
     }
   }
 }
