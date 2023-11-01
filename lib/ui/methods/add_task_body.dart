@@ -195,7 +195,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                   Task task = Task(
                       title: _titleController.text.toString(),
                       purpose: _getPurpose(_selectedPurpose),
-                      date: DateFormat.yMd().format(_selectedDate),
+                      date: DateFormat('MMMM d').format(_selectedDate),
                       startTime: _startTime,
                       endTime: _endTime,
                       repeat: _repeat,

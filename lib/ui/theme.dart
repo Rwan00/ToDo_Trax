@@ -8,6 +8,13 @@ const dPrimaryClr = Color.fromRGBO(4, 54, 74, 1);
 const dSecondaryClr = Color.fromRGBO(23, 107, 135, 1);
 const myPurple = Color.fromRGBO(147, 119, 205, 1);
 const myOrange = Color.fromRGBO(222, 138, 40, 1);
+const myGreen = Color.fromRGBO(91, 168, 0, 1.0);
+const myRed = Color.fromRGBO(140, 22, 22, 1.0);
+const myPink = Color.fromRGBO(246, 86, 113, 1.0);
+const myYellow = Color.fromRGBO(246, 243, 83, 1.0);
+const myGrey = Color.fromRGBO(115, 112, 112, 1.0);
+const myTeal = Color.fromRGBO(65, 117, 108, 1.0);
+const myBlue = Color.fromRGBO(32, 135, 176, 1.0);
 
 class Themes {
   static final light = ThemeData(

@@ -9,18 +9,15 @@ part 'read_task_state.dart';
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
 
-  fetchAllTasks() async
+  List<Task>? tasks;
+  fetchAllTasks()
   {
-    try{
-      var tasksBox = Hive.box<Task>("notes_box");
 
-   var tasks = tasksBox.values.toList();
-      emit(TasksSuccess(tasks));
-    }
-    catch(e)
-    {
-      //isLoading= false;
-      emit(TasksFailure(e.toString()));
-    }
+       var tasksBox = Hive.box<Task>("notes_box");
+
+        tasks = tasksBox.values.toList();
+        print(tasks);
+
+
   }
 }

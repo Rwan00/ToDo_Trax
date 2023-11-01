@@ -15,7 +15,7 @@ class AddTaskCubit extends Cubit<AddTaskState>
     //isLoading = true;
     emit(AddTaskLoading());
     try{
-      var tasksBox = Hive.box("notes_box");
+      var tasksBox = Hive.box<Task>("notes_box");
       //isLoading = false;
 
       await tasksBox.add(task);
