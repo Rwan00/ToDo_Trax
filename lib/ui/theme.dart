@@ -155,3 +155,21 @@ TextStyle get txtSplash {
         color:   Color.fromRGBO(58, 58, 58, 1),
       ));
 }
+TextStyle get txtDis {
+  return GoogleFonts.roboto(
+      textStyle:    const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 10,
+        color:   Colors.white,
+      ));
+}
+TextStyle get taskTileH {
+  return GoogleFonts.roboto(
+      textStyle:  TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 20,
+        color:   Get.isDarkMode? const Color.fromRGBO(202, 202, 202, 1) : const Color.fromRGBO(97, 97, 97, 1) ,
+      ));
+}
+
+

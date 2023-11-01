@@ -31,7 +31,7 @@ class Ongoing extends StatelessWidget {
       child: Scaffold(
         backgroundColor: context.theme.colorScheme.background,
         appBar: buildAppBar(context),
-        body: const OngoingBody(),
+        body:  OngoingBody(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushReplacement(
