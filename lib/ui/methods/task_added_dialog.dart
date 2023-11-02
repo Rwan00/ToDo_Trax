@@ -47,15 +47,15 @@ void buildDialog(BuildContext context,
             height: 42,
           ),
           GestureDetector(
-            onTap: () {
+            onTap: () async{
               Get.back();
-             /*await Navigator.pushReplacement(
+             await Navigator.pushReplacement(
                  context,
                  PageTransition(
                    child: const Ongoing(),
                    type: PageTransitionType.fade,
                    duration: const Duration(milliseconds: 700),
-                 ));*/
+                 ));
 
             },
             child: customContainer(text: "Back"),

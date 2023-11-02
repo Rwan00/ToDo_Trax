@@ -57,107 +57,113 @@ class DescriptionView extends StatelessWidget {
               ))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              task.title!,
-              style: txtDes1,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 30,
+                ),
                 Text(
-                  "Due Date",
-                  style: txtHint,
+                  task.title!,
+                  style: txtDes1,
                 ),
                 const SizedBox(
-                  width: 30,
+                  height: 16,
                 ),
-                Text(
-                  task.date!,
-                  style: txtHint.copyWith(fontSize: 10),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Time",
-                  style: txtHint,
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Text(
-                  "${task.startTime} - ${task.endTime}",
-                  style: txtHint.copyWith(fontSize: 10),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Repeat",
-                  style: txtHint,
+                Row(
+                  children: [
+                    Text(
+                      "Due Date",
+                      style: txtHint,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      task.date!,
+                      style: txtHint.copyWith(fontSize: 10),
+                    )
+                  ],
                 ),
                 const SizedBox(
-                  width: 30,
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Time",
+                      style: txtHint,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      "${task.startTime} - ${task.endTime}",
+                      style: txtHint.copyWith(fontSize: 10),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Repeat",
+                      style: txtHint,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      task.repeat == 0? "Daily" : task.repeat == 1? "Weekly" : task.repeat == 2? "Monthly":"None",
+                      style: txtHint.copyWith(fontSize: 10),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
                 ),
                 Text(
-                  task.repeat == 0? "Daily" : task.repeat == 1? "Weekly" : task.repeat == 2? "Monthly":"None",
-                  style: txtHint.copyWith(fontSize: 10),
-                )
+                  "Description",
+                  style: txtOngoing2,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Text(
+                    task.description!,
+                    style: txtHint,
+                  ),
+                ),
               ],
             ),
-            const SizedBox(
-              height: 24,
+          ),
+          const SizedBox(
+            height: 480,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: MyButton("Save As Done", () {
+              //Get.back();
+              buildDialog(
+                context,
+                imgUrl: 'assets/images/congrats.gif',
+                titleTxt: 'Congratulations',
+                subTitleTxt: 'You Successfully completed your task. It’s a great step for better life waiting for you.',
+              );
+
+            },
+              clr: Get.isDarkMode? dPrimaryClr:primaryClr,
             ),
-            Text(
-              "Description",
-              style: txtOngoing2,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Text(
-                task.description!,
-                style: txtHint,
-              ),
-            ),
-            const SizedBox(
-              height: 380,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: MyButton("Save As Done", () {
-                buildDialog(
-                  context,
-                  imgUrl: 'assets/images/congrats.gif',
-                  titleTxt: 'Congratulations',
-                  subTitleTxt: 'You Successfully completed your task. It’s agreat step for better life waiting for you.',
-                );
-              },
-                clr: Get.isDarkMode? dPrimaryClr:primaryClr,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
