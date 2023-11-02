@@ -13,7 +13,7 @@ class OngoingTaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //padding: const EdgeInsets.symmetric(vertical: 25),
-      height: 95,
+      height: 90,
       //margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xffBFBFBF), width: 0.3),
@@ -70,6 +70,7 @@ class OngoingTaskTile extends StatelessWidget {
             ),
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const SizedBox(
                 height: 7,
@@ -79,7 +80,7 @@ class OngoingTaskTile extends StatelessWidget {
                 style: taskTileH,
               ),
               const SizedBox(
-                height: 6.5,
+                height: 16,
               ),
               Row(
                 children: <Widget>[
@@ -98,7 +99,7 @@ class OngoingTaskTile extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 5.5,
+                height: 6,
               ),
               Row(
                 children: <Widget>[

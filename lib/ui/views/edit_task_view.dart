@@ -54,14 +54,7 @@ class _EditTaskViewState extends State<EditTaskView> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                PageTransition(
-                  child: const YourTasks(),
-                  type: PageTransitionType.leftToRight,
-                  //alignment: Alignment.bottomLeft,
-                  duration: const Duration(milliseconds: 700),
-                ));
+            Get.back();
           },
           color: const Color.fromRGBO(167, 167, 167, 1),
           icon: const Icon(

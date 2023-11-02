@@ -149,10 +149,10 @@ TextStyle get txtDes1 {
 }
 TextStyle get txtSplash {
   return GoogleFonts.fugazOne(
-      textStyle:    const TextStyle(
+      textStyle:     TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 60,
-        color:   Color.fromRGBO(58, 58, 58, 1),
+        color:   Get.isDarkMode? Colors.white: const Color.fromRGBO(58, 58, 58, 1),
       ));
 }
 TextStyle get txtDis {

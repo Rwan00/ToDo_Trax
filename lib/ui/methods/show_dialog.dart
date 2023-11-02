@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../theme.dart';
 
-Future<dynamic> buildDialog(
+Future<dynamic> buildAlertDialog(
     {required BuildContext context,
     required String title,
     required String content,
@@ -17,7 +17,7 @@ Future<dynamic> buildDialog(
   final AlertDialog alert = AlertDialog(
     backgroundColor: context.theme.colorScheme.background,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-    contentTextStyle: txtDes1.copyWith(fontSize: 20),
+    contentTextStyle: txtDes1.copyWith(fontSize: 16),
     title: Text(
       title,
       style: heading,

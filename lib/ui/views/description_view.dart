@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../../models/task.dart';
 import '../methods/task_added_dialog.dart';
 import '../theme.dart';
 import '../widgets/custom_button.dart';
@@ -9,7 +10,8 @@ import 'edit_task_view.dart';
 import 'ongoing_view.dart';
 
 class DescriptionView extends StatelessWidget {
-  const DescriptionView({super.key});
+  final Task task;
+  const DescriptionView({required this.task,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,7 @@ class DescriptionView extends StatelessWidget {
         backgroundColor: context.theme.colorScheme.background,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                PageTransition(
-                  child: const Ongoing(),
-                  type: PageTransitionType.leftToRight,
-                  //alignment: Alignment.bottomLeft,
-                  duration: const Duration(milliseconds: 700),
-                ));
+            Get.back();
           },
           color: const Color.fromRGBO(167, 167, 167, 1),
           icon: Container(
@@ -71,7 +66,7 @@ class DescriptionView extends StatelessWidget {
               height: 30,
             ),
             Text(
-              "Go To Gym",
+              task.title!,
               style: txtDes1,
             ),
             const SizedBox(
@@ -87,7 +82,7 @@ class DescriptionView extends StatelessWidget {
                   width: 30,
                 ),
                 Text(
-                  "October 25",
+                  task.date!,
                   style: txtHint.copyWith(fontSize: 10),
                 )
               ],
@@ -105,7 +100,7 @@ class DescriptionView extends StatelessWidget {
                   width: 30,
                 ),
                 Text(
-                  "10 : 00 Am - 06 : 00 Pm",
+                  "${task.startTime} - ${task.endTime}",
                   style: txtHint.copyWith(fontSize: 10),
                 )
               ],
@@ -123,7 +118,7 @@ class DescriptionView extends StatelessWidget {
                   width: 30,
                 ),
                 Text(
-                  "Daily",
+                  task.repeat == 0? "Daily" : task.repeat == 1? "Weekly" : task.repeat == 2? "Monthly":"None",
                   style: txtHint.copyWith(fontSize: 10),
                 )
               ],
@@ -141,7 +136,7 @@ class DescriptionView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: Text(
-                "Lorem ipsum dolor sit amet consectetur. In commodo nunc donec nunc luctus ornare. Eget nulla eu hac ac. Blandit dolor feugiat sodales eu pulvinar nulla. Vel libero mattis arcu aliquam molestie. Cursus vestibulum urna vel ornare amet diam. Lorem ipsum dolor sit amet consectetur. In commodo nunc donec nunc luctus ornare. Eget nulla eu hac ac. Blandit dolor feugiat sodales eu pulvinar nulla. Vel libero mattis arcu aliquam molestie. Cursus vestibulum urna vel ornare amet diam.",
+                task.description!,
                 style: txtHint,
               ),
             ),
