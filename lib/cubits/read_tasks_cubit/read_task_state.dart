@@ -5,3 +5,4 @@ part of 'read_task_cubit.dart';
 abstract class TasksState{}
 
 class TasksInitial extends TasksState{}
+class TasksSuccess extends TasksState{}

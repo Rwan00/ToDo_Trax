@@ -21,32 +21,39 @@ showOngoingTasks() {
       print(tasks);
       return const NoTaskMsg();
     } else {
-      return ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (BuildContext context, int index) {
-            if(tasks[index].repeat == 0 ||
-                tasks[index].date == DateFormat('MMMM d').format(DateTime.now()) &&
-            tasks[index].isCompleted == 0
-            ) {
-              return AnimationConfiguration.staggeredList(
-                duration: const Duration(milliseconds: 500),
-                position: index,
-                child: SlideAnimation(
-                  horizontalOffset: 100,
-                  child: FadeInAnimation(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8.0, bottom: 8, right: 24),
-                      child: OngoingTaskTile(task: tasks[index]),
+      return RefreshIndicator(
+        onRefresh: ()async{
+
+           await BlocProvider.of<TasksCubit>(context).fetchAllTasks();
+
+        },
+        child: ListView.builder(
+            itemCount: tasks.length,
+            itemBuilder: (BuildContext context, int index) {
+              if(tasks[index].repeat == 0 ||
+                  tasks[index].date == DateFormat('MMMM d').format(DateTime.now()) &&
+              tasks[index].isCompleted == 0
+              ) {
+                return AnimationConfiguration.staggeredList(
+                  duration: const Duration(milliseconds: 500),
+                  position: index,
+                  child: SlideAnimation(
+                    horizontalOffset: 100,
+                    child: FadeInAnimation(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8.0, bottom: 8, right: 24),
+                        child: OngoingTaskTile(task: tasks[index]),
+                      ),
                     ),
                   ),
-                ),
-              );
-            }
-            else {
-              return Container();
-            }
-          });
+                );
+              }
+              else {
+                return Container();
+              }
+            }),
+      );
     }
   });
 }
