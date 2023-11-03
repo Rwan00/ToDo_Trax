@@ -31,8 +31,7 @@ showOngoingTasks() {
             itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
               if(tasks[index].repeat == 0 ||
-                  tasks[index].date == DateFormat('MMMM d').format(DateTime.now()) &&
-              tasks[index].isCompleted == 0
+                  tasks[index].date == DateFormat('MMMM d').format(DateTime.now())
               ) {
                 return AnimationConfiguration.staggeredList(
                   duration: const Duration(milliseconds: 500),

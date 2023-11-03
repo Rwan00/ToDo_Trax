@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:todo_trax/ui/methods/show_dialog.dart';
 import 'package:todo_trax/ui/methods/task_added_dialog.dart';
 
 import '../../cubits/read_tasks_cubit/read_task_cubit.dart';
 import '../../models/task.dart';
 import '../theme.dart';
+import '../views/ongoing_view.dart';
 import '../widgets/ongoing_task_tile.dart';
 import '../widgets/task_tile.dart';
 import 'no_task_message.dart';
@@ -20,17 +22,17 @@ showYourTasks(DateTime myDate,List<Task> tasks) {
       print(tasks);
       return const NoTaskMsg();
     } else {
+     // print(myDate.difference(DateFormat('MMMM d').parse(tasks[0].date!)).inDays % 7 );
       return RefreshIndicator(
-        onRefresh: () async {
-          await BlocProvider.of<TasksCubit>(context).fetchAllTasks();
-        },
+        onRefresh: ()async { BlocProvider.of<TasksCubit>(context)
+            .fetchAllTasks(); },
         child: ListView.builder(
             itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
               if (tasks[index].repeat == 0 ||
                   tasks[index].date == DateFormat('MMMM d').format(myDate) ||
                   (tasks[index].repeat == 1 &&
-                      myDate.difference(DateFormat('MMMM d').parse(tasks[index].date!)).inDays % 7 == 0) ||
+                      myDate.difference(DateFormat('MMMM d').parse(tasks[index].date!)).inDays % 7 == 3) ||
                   (tasks[index].repeat == 2 &&
                       DateFormat('MMMM d').parse(tasks[index].date!).day ==
                           myDate.day)) {
@@ -50,14 +52,21 @@ showYourTasks(DateTime myDate,List<Task> tasks) {
                             if (dir == DismissDirection.startToEnd) {
                               final bool result = await buildAlertDialog(
                                   context: context,
-                                  title: 'Delete ${item.title} Task',
+                                  title: 'Delete This Task',
                                   content:
-                                      'Are You Sure You Want To Delete ${item.title} Task?',
+                                      'Are You Sure You Want To Delete This Task?',
                                   onTap: () {
                                     tasks[index].delete();
                                     BlocProvider.of<TasksCubit>(context)
                                         .fetchAllTasks();
                                     Get.back();
+                                    Navigator.pushReplacement(
+                                        context,
+                                        PageTransition(
+                                          child: const Ongoing(),
+                                          type: PageTransitionType.fade,
+                                          duration: const Duration(milliseconds: 700),
+                                        ));
                                   },
                                   q1: 'Delete',
                                   clr: Colors.red);
@@ -65,11 +74,12 @@ showYourTasks(DateTime myDate,List<Task> tasks) {
                             } else {
                               final bool result = await buildAlertDialog(
                                   context: context,
-                                  title: 'Complete ${item.title} Task',
+                                  title: 'Complete The Task',
                                   content:
-                                      'Did You Complete ${item.title} Task?',
+                                      'Did You Complete This Task?',
                                   onTap: () {
                                     tasks[index].isCompleted = 1;
+                                    tasks[index].save();
                                     Get.back();
                                     buildDialog(
                                       context,

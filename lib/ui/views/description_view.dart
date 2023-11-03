@@ -152,6 +152,8 @@ class DescriptionView extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: MyButton("Save As Done", () {
+                task.isCompleted = 1;
+                task.save();
                 //Get.back();
                 buildDialog(
                   context,
