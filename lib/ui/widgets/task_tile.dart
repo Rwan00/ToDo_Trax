@@ -125,7 +125,7 @@ class TaskTile extends StatelessWidget {
                 Navigator.push(
                     context,
                     PageTransition(
-                      child: const EditTaskView(),
+                      child:  EditTaskView(task: task,),
                       type: PageTransitionType.rightToLeft,
                       //alignment: Alignment.bottomLeft,
                       duration: const Duration(milliseconds: 700),

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_trax/ui/methods/show_your_tasks.dart';
 
 import '../../cubits/read_tasks_cubit/read_task_cubit.dart';
+import '../../models/task.dart';
 import '../theme.dart';
 import '../widgets/separator.dart';
 
@@ -23,9 +24,12 @@ class _YourTasksBodyState extends State<YourTasksBody> {
     super.initState();
   }
 
+
   DateTime myDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
+    List<Task> tasks = BlocProvider.of<TasksCubit>(context).tasks ?? [];
     return Padding(
       padding: const EdgeInsets.only(left: 24),
       child: Column(
@@ -47,11 +51,12 @@ class _YourTasksBodyState extends State<YourTasksBody> {
                           Icons.keyboard_arrow_down,
                           size: 24,
                           color: Color.fromRGBO(119, 119, 119, 1),
-                        ))
+                        ),
+                    ),
                   ],
                 ),
                 Text(
-                  "3 Tasks This Day",
+                  "You Have ${tasks.length} Tasks To Do",
                   style: txtTask3,
                 ),
                 const SizedBox(
@@ -68,7 +73,7 @@ class _YourTasksBodyState extends State<YourTasksBody> {
           const SizedBox(
             height: 20,
           ),
-          Expanded(child: showYourTasks(myDate),)
+          Expanded(child: showYourTasks(myDate,tasks),)
         ],
       ),
     );

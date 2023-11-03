@@ -7,9 +7,10 @@ class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? widget;
   final String? hint;
+  final void Function(String)? onChange;
 
   const InputField(
-      {required this.title, this.controller, this.widget,this.hint,super.key});
+      {required this.title, this.controller, this.widget, this.hint, super.key, this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class InputField extends StatelessWidget {
                 maxHeight: 45,
               ),
               child: TextFormField(
+                onChanged:onChange,
                 maxLines: null,
                 controller: controller,
                 autofocus: false,
@@ -51,8 +53,8 @@ class InputField extends StatelessWidget {
                         color: widget != null
                             ? const Color.fromRGBO(98, 98, 98, 1)
                             : Get.isDarkMode
-                                ? dSecondaryClr
-                                : primaryClr,
+                            ? dSecondaryClr
+                            : primaryClr,
                         width: 1),
                   ),
                 ),

@@ -13,9 +13,9 @@ import '../widgets/ongoing_task_tile.dart';
 import '../widgets/task_tile.dart';
 import 'no_task_message.dart';
 
-showYourTasks(DateTime myDate) {
+showYourTasks(DateTime myDate,List<Task> tasks) {
   return BlocBuilder<TasksCubit, TasksState>(builder: (context, state) {
-    List<Task> tasks = BlocProvider.of<TasksCubit>(context).tasks ?? [];
+
     if (tasks.isEmpty) {
       print(tasks);
       return const NoTaskMsg();
@@ -28,7 +28,7 @@ showYourTasks(DateTime myDate) {
             itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
               if (tasks[index].repeat == 0 ||
-                  tasks[index].date == DateFormat.yMd().format(myDate) ||
+                  tasks[index].date == DateFormat('MMMM d').format(myDate) ||
                   (tasks[index].repeat == 1 &&
                       myDate.difference(DateFormat('MMMM d').parse(tasks[index].date!)).inDays % 7 == 0) ||
                   (tasks[index].repeat == 2 &&
