@@ -9,6 +9,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:todo_trax/ui/views/description_view.dart';
+import 'package:todo_trax/ui/views/ongoing_view.dart';
 
 import '/models/task.dart';
 
@@ -24,8 +25,8 @@ class NotifyHelper {
 
   initializeNotification() async {
     await _configureLocalTimeZone();
-    //_configureSelectNotificationSubject();
-    // await requestIOSPermissions(flutterLocalNotificationsPlugin);
+    _configureSelectNotificationSubject();
+    //await requestIOSPermissions(flutterLocalNotificationsPlugin);
     final DarwinInitializationSettings initializationSettingsIOS =
     DarwinInitializationSettings(
       requestSoundPermission: false,
@@ -54,9 +55,8 @@ class NotifyHelper {
     if (notificationResponse.payload != null) {
       debugPrint('notification payload: $payload');
     }
-    /*await Get.to(DescriptionView(
-      task: ,
-    ));*/
+    await Get.to(const Ongoing(
+    ));
   }
 
   displayNotification({required String title, required String body}) async {
@@ -121,13 +121,16 @@ class NotifyHelper {
   tz.TZDateTime _nextInstanceOfTenAM(
       int hour, int minutes, int remind, String repeat, String date) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    print(now);
+    print("now $now");
 
-    var formattedDate = DateFormat.yMd().parse(date);
+    var formattedDate = DateFormat('MMMM d').parse(date);
     final tz.TZDateTime fd = tz.TZDateTime.from(formattedDate,tz.local);
+    print(fd.year);
+    print(fd.month);
+    print(fd.day);
 
     tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, fd.year, fd.month, fd.day, hour, minutes);
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minutes);
     print("scheduled Date: $scheduledDate");
 
     /*scheduledDate = afterRemind(remind, scheduledDate);
@@ -209,14 +212,13 @@ class NotifyHelper {
     Get.dialog(Text(body!));
   }
 
-  /*void _configureSelectNotificationSubject() {
-    selectNotificationSubject.stream.listen() async {
+  void _configureSelectNotificationSubject() {
+    selectNotificationSubject.stream.listen((String payload) async {
       debugPrint('My payload is $payload');
-      await Get.to(() => const DescriptionView(
-        task: null,
+      await Get.to(() => const Ongoing(
       ));
     });
-  }*/
+  }
 
   tz.TZDateTime afterRemind(int remind, tz.TZDateTime scheduledDate) {
     if (remind == 5) {

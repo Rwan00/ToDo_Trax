@@ -248,44 +248,4 @@ class _EditViewBodyState extends State<EditViewBody> {
     );
   }
 
-  _getDateFromUser() async {
-    DateTime? _pickedDate = await showDatePicker(
-      initialEntryMode: DatePickerEntryMode.input,
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(2015),
-      lastDate: DateTime(2030),
-    );
-    if (_pickedDate != null) {
-      setState(() {
-        _selectedDate = _pickedDate;
-      });
-    } else {
-      print("IT'S NULL OR SOMETHING IS WRONG!!");
-    }
-  }
-
-  _getTimeFromUser({required bool isStartTime}) async {
-    TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: isStartTime
-          ? TimeOfDay.fromDateTime(DateTime.now())
-          : TimeOfDay.fromDateTime(
-          DateTime.now().add(const Duration(minutes: 15))),
-    );
-
-    String formattedTime = pickedTime!.format(context);
-
-    if (isStartTime) {
-      setState(() {
-        _startTime = formattedTime;
-      });
-    } else if (!isStartTime) {
-      setState(() {
-        _endTime = formattedTime;
-      });
-    } else {
-      print("IT'S NULL OR SOMETHING IS WRONG!!");
-    }
-  }
 }

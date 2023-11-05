@@ -20,11 +20,6 @@ class NoTaskMsg extends StatelessWidget {
                   const SizedBox(
                     height: 150,
                   ),
-                  /*Image.asset(
-                "assets/images/noData.png",
-                height: 150,
-                width: 250,
-              ),*/
                   SvgPicture.asset(
                     "assets/images/noData.svg",
                     height: 160,

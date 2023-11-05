@@ -73,7 +73,7 @@ class _YourTasksBodyState extends State<YourTasksBody> {
           const SizedBox(
             height: 20,
           ),
-          Expanded(child: showYourTasks(myDate,tasks),)
+          Expanded(child: ShowYourTasks(myDate: myDate,tasks: tasks,),)
         ],
       ),
     );

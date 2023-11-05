@@ -6,6 +6,7 @@ import 'package:todo_trax/cubits/add_task_cubit/add_task_cubit.dart';
 import 'package:todo_trax/ui/methods/task_added_dialog.dart';
 
 import '../../models/task.dart';
+import '../../services/task_manager.dart';
 import '../theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/input_field.dart';
@@ -193,6 +194,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                     (_noteController.text.isNotEmpty &&
                         !_noteController.text.isNum)) {
                   Task task = Task(
+                      id: TaskManager.generateNextId(),
                       title: _titleController.text.toString(),
                       purpose: _getPurpose(_selectedPurpose),
                       date: DateFormat('MMMM d').format(_selectedDate),

@@ -9,6 +9,7 @@ import 'package:todo_trax/simple_bloc_observer.dart';
 import 'package:todo_trax/ui/theme.dart';
 import 'package:todo_trax/ui/views/ongoing_view.dart';
 import 'package:todo_trax/ui/views/splash_view.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'models/task.dart';
 
@@ -20,6 +21,7 @@ void main() async{
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TaskAdapter());
   await Hive.openBox<Task>("notes_box");
+  tz.initializeTimeZones();
   runApp(const ToDoTrax());
 }
 
