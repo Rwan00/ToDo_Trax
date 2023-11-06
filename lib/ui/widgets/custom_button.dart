@@ -14,19 +14,21 @@ class MyButton extends StatelessWidget {
   final bool isLoading;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        width: 312,
-        height: 48,
+        width: width*0.6,
+        height: height*0.055,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: clr,
         ),
         child: isLoading?  SizedBox(
-          height: 20,
-          width: 15,
+          height: height*0.02,
+          width: width*0.02,
           child: CircularProgressIndicator(
             color: Get.isDarkMode? dPrimaryClr: primaryClr,
           ),

@@ -29,6 +29,8 @@ class _YourTasksBodyState extends State<YourTasksBody> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     List<Task> tasks = BlocProvider.of<TasksCubit>(context).tasks ?? [];
     return Padding(
       padding: const EdgeInsets.only(left: 24),
@@ -59,19 +61,19 @@ class _YourTasksBodyState extends State<YourTasksBody> {
                   "You Have ${tasks.length} Tasks To Do",
                   style: txtTask3,
                 ),
-                const SizedBox(
-                  height: 20,
+                 SizedBox(
+                  height: height * 0.025,
                 ),
                 _addDateBar(),
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
+           SizedBox(
+            height: height*0.025,
           ),
-          separator(),
-          const SizedBox(
-            height: 20,
+          separator(context),
+           SizedBox(
+            height: height*0.02,
           ),
           Expanded(child: ShowYourTasks(myDate: myDate,tasks: tasks,),)
         ],
@@ -96,6 +98,8 @@ class _YourTasksBodyState extends State<YourTasksBody> {
   }
 
   _addDateBar() {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: const Color.fromRGBO(174, 174, 174, 1)),
@@ -103,8 +107,8 @@ class _YourTasksBodyState extends State<YourTasksBody> {
       child: DatePicker(
         DateTime.now(),
         initialSelectedDate: myDate,
-        width: 44,
-        height: 58,
+        width: width*0.11,
+        height: height*0.07,
         selectedTextColor: Colors.white,
         selectionColor: Get.isDarkMode ? dPrimaryClr : primaryClr,
         deactivatedColor: Get.isDarkMode ? Colors.white : Colors.black,

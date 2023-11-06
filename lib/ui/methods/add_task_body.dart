@@ -20,6 +20,7 @@ class AddTaskBody extends StatefulWidget {
 }
 
 class _AddTaskBodyState extends State<AddTaskBody> {
+
   bool isSwitched = false;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
@@ -45,6 +46,8 @@ class _AddTaskBodyState extends State<AddTaskBody> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -73,8 +76,8 @@ class _AddTaskBodyState extends State<AddTaskBody> {
             ),
           ],
         ),
-        const SizedBox(
-          height: 8,
+         SizedBox(
+          height: height*0.025,
         ),
         InputField(
           title: 'Title',
@@ -130,8 +133,8 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 28,
+             SizedBox(
+              width: width*0.1,
             ),
             Expanded(
               child: InputField(
@@ -150,15 +153,15 @@ class _AddTaskBodyState extends State<AddTaskBody> {
           ],
         ),
         _repeatContainer(),
-        const SizedBox(
-          height: 24,
+         SizedBox(
+          height: height*0.025,
         ),
         InputField(
           title: 'Description',
           controller: _noteController,
         ),
-        const SizedBox(
-          height: 24,
+         SizedBox(
+          height: height*0.025,
         ),
         Row(
           children: <Widget>[
@@ -181,8 +184,8 @@ class _AddTaskBodyState extends State<AddTaskBody> {
             ),
           ],
         ),
-        const SizedBox(
-          height: 70,
+         SizedBox(
+          height: height*0.1,
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -249,6 +252,7 @@ class _AddTaskBodyState extends State<AddTaskBody> {
                 });
               },
               child: customContainer(
+                context: context,
                   text: index == 0
                       ? "Daily"
                       : index == 1

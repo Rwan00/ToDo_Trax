@@ -11,9 +11,11 @@ class OngoingTaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Container(
       //padding: const EdgeInsets.symmetric(vertical: 25),
-      height: 90,
+      height: height*0.11,
       //margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xffBFBFBF), width: 0.3),
@@ -79,8 +81,8 @@ class OngoingTaskTile extends StatelessWidget {
                 task.title!,
                 style: taskTileH,
               ),
-              const SizedBox(
-                height: 16,
+               SizedBox(
+                height: height*0.015,
               ),
               Row(
                 children: <Widget>[
@@ -114,15 +116,15 @@ class OngoingTaskTile extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            width: 110,
+           SizedBox(
+            width: width*0.25,
           ),
           Column(children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 7),
               child: Container(
-                width: 40,
-                height: 19,
+                width: width*0.1,
+                height: height*0.025,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Get.isDarkMode
@@ -142,8 +144,8 @@ class OngoingTaskTile extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: height*0.02,
             ),
             Text(
               task.isCompleted == 0 ? "in progress" : task.isCompleted == 1

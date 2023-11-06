@@ -16,6 +16,8 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -29,7 +31,7 @@ class TaskTile extends StatelessWidget {
       },
       child: Container(
         //padding: const EdgeInsets.symmetric(vertical: 25),
-        height: 75,
+        height: height*0.09,
         //margin: EdgeInsets.all(16),
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xffBFBFBF), width: 0.3),
@@ -89,8 +91,8 @@ class TaskTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(
-                  height: 16,
+                 SizedBox(
+                  height: height*0.01,
                 ),
                 Text(
                   task.title!,
@@ -117,8 +119,8 @@ class TaskTile extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              width: 125,
+             SizedBox(
+              width: width*0.3,
             ),
             IconButton(
               onPressed: () {
@@ -133,7 +135,7 @@ class TaskTile extends StatelessWidget {
               },
               icon: SvgPicture.asset(
                 "assets/images/editIcon.svg",
-                height: 26,
+                height: height*0.03,
                 colorFilter: const ColorFilter.mode(
                     Color.fromRGBO(119, 119, 119, 1),
                     BlendMode.srcIn

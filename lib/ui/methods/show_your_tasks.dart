@@ -41,6 +41,8 @@ class _ShowYourTasksState extends State<ShowYourTasks> {
   }
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return BlocBuilder<TasksCubit, TasksState>(builder: (context, state) {
       if (widget.tasks.isEmpty) {
         print(widget.tasks);
@@ -136,7 +138,7 @@ class _ShowYourTasksState extends State<ShowYourTasks> {
                               }
                             },
                             background: Container(
-                              height: 95,
+                              height: height*0.1,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: const Color(0xffBFBFBF), width: 0.3),
@@ -151,7 +153,7 @@ class _ShowYourTasksState extends State<ShowYourTasks> {
                               ),
                             ),
                             secondaryBackground: Container(
-                              height: 95,
+                              height: height*0.1,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: const Color(0xffBFBFBF), width: 0.3),

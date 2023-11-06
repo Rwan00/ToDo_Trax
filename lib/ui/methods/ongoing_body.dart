@@ -29,6 +29,8 @@ class _OngoingBodyState extends State<OngoingBody> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     DateTime myDate = DateTime.now();
     return Padding(
       padding: const EdgeInsets.only(left: 32),
@@ -45,8 +47,8 @@ class _OngoingBodyState extends State<OngoingBody> {
                   "Ready to do your Daily Tasks ?? ",
                   style: headingOngoing,
                 ),
-                const SizedBox(
-                  height: 12,
+                 SizedBox(
+                  height: height*0.015,
                 ),
                 Row(
                   children: <Widget>[
@@ -61,8 +63,8 @@ class _OngoingBodyState extends State<OngoingBody> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 6,
+                 SizedBox(
+                  height: height*0.005,
                 ),
                 Text(
                   DateFormat('MMM,d,y').format(myDate),
@@ -71,12 +73,12 @@ class _OngoingBodyState extends State<OngoingBody> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
+           SizedBox(
+            height: height*0.015,
           ),
-          separator(),
-          const SizedBox(
-            height: 20,
+          separator(context),
+           SizedBox(
+            height: height*0.02,
           ),
           Row(
             children: <Widget>[
@@ -97,6 +99,7 @@ class _OngoingBodyState extends State<OngoingBody> {
                         ));
                   },
                   child: buildIcon(
+                    context: context,
                     imgUrl: "assets/images/calender.svg",
                     containerClr: Get.isDarkMode ? dPrimaryClr : primaryClr,
                     iconClr: Colors.white,

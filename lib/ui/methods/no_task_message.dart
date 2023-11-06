@@ -8,6 +8,8 @@ class NoTaskMsg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Stack(
         children: <Widget>[
           AnimatedPositioned(
@@ -17,13 +19,13 @@ class NoTaskMsg extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 150,
+                   SizedBox(
+                    height: height*0.15,
                   ),
                   SvgPicture.asset(
                     "assets/images/noData.svg",
-                    height: 160,
-                    width: 210,
+                    height: height*0.2,
+                    width: width*0.2,
                     semanticsLabel: "Task",
                     colorFilter: const ColorFilter.mode(
                         Color.fromRGBO(26, 115, 233, 1), BlendMode.dst),
@@ -36,8 +38,8 @@ class NoTaskMsg extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(
-                    height: 180,
+                   SizedBox(
+                    height: height*0.02,
                   ),
                 ],
               ),

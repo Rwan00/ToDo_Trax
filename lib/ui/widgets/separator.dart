@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-separator()
+separator(BuildContext context)
 {
+  double width = MediaQuery.of(context).size.width;
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: <Widget>[
@@ -14,7 +15,7 @@ separator()
         ),
       ),
       Container(
-        width: 258,
+        width: width*0.6,
         height: 2.5,
         color: const Color.fromRGBO(119, 119, 119, 1),
       ),

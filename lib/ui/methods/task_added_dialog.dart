@@ -10,20 +10,22 @@ void buildDialog(BuildContext context,
     {required String imgUrl,
     required String titleTxt,
     required String subTitleTxt}) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
   final AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     backgroundColor: context.theme.colorScheme.background,
     content: SizedBox(
-      height: 400,
+      height: height*0.45,
       child: Column(
         children: <Widget>[
           Image.asset(
             imgUrl,
-            width: 192,
-            height: 192,
+            width: width*0.5,
+            height: height*0.25,
           ),
-          const SizedBox(
-            height: 20,
+           SizedBox(
+            height: height*0.02,
           ),
           Text(
             titleTxt,
@@ -33,8 +35,8 @@ void buildDialog(BuildContext context,
                   : const Color.fromRGBO(35, 35, 35, 1),
             ),
           ),
-          const SizedBox(
-            height: 12,
+           SizedBox(
+            height: height*0.01,
           ),
           Text(
             subTitleTxt,
@@ -43,8 +45,8 @@ void buildDialog(BuildContext context,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            height: 42,
+           SizedBox(
+            height: height*0.04,
           ),
           GestureDetector(
             onTap: () async{
@@ -58,7 +60,7 @@ void buildDialog(BuildContext context,
                  ));
 
             },
-            child: customContainer(text: "Back"),
+            child: customContainer(context:context,text: "Back"),
           )
         ],
       ),

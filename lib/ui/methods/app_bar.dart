@@ -7,14 +7,16 @@ import '../theme.dart';
 import '../widgets/custom_icon.dart';
 
 AppBar buildAppBar(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
   return AppBar(
     backgroundColor: context.theme.colorScheme.background,
     elevation: 0,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(
-          width: 19,
+         SizedBox(
+          width: width*0.05,
         ),
         Text(
           "Hello Friend",
@@ -33,6 +35,7 @@ AppBar buildAppBar(BuildContext context) {
       GestureDetector(
         onTap: () => ThemeServices().switchTheme(),
         child: buildIcon(
+          context: context,
             imgUrl: Get.isDarkMode
                 ? "assets/images/mode-light.svg"
                 : "assets/images/mode-dark.svg",

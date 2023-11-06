@@ -130,7 +130,7 @@ class NotifyHelper {
     print(fd.day);
 
     tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minutes);
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, now.minute+2);
     print("scheduled Date: $scheduledDate");
 
     /*scheduledDate = afterRemind(remind, scheduledDate);

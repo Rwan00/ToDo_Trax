@@ -23,7 +23,6 @@ class _EditViewBodyState extends State<EditViewBody> {
   final TextEditingController? titleController = TextEditingController();
   final TextEditingController? noteController = TextEditingController();
   int _repeat = 0;
-  DateTime _selectedDate = DateTime.now();
   List<String> purposeList = [
     "Work",
     "Personal",
@@ -35,14 +34,10 @@ class _EditViewBodyState extends State<EditViewBody> {
     "Shopping",
     "Entertainment"
   ];
-  String _selectedPurpose = "Work";
-  String _startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
-  String _endTime = DateFormat('hh:mm a')
-      .format(DateTime.now().add(const Duration(minutes: 15)))
-      .toString();
-  int _reminder = 0;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: SingleChildScrollView(
@@ -71,8 +66,8 @@ class _EditViewBodyState extends State<EditViewBody> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
+             SizedBox(
+              height: height*0.025,
             ),
             InputField(
               hint: widget.task.title,
@@ -141,8 +136,8 @@ class _EditViewBodyState extends State<EditViewBody> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 28,
+                 SizedBox(
+                  width: width*0.1,
                 ),
                 Expanded(
                   child: InputField(
@@ -158,8 +153,8 @@ class _EditViewBodyState extends State<EditViewBody> {
               ],
             ),
             _repeatContainer(),
-            const SizedBox(
-              height: 24,
+             SizedBox(
+              height: height*0.025,
             ),
             InputField(
               hint: widget.task.description,
@@ -169,8 +164,8 @@ class _EditViewBodyState extends State<EditViewBody> {
               title: 'Description',
               controller: noteController,
             ),
-            const SizedBox(
-              height: 24,
+             SizedBox(
+              height: height*0.025,
             ),
             Row(
               children: <Widget>[
@@ -184,7 +179,6 @@ class _EditViewBodyState extends State<EditViewBody> {
                   onChanged: (value) {
                     setState(() {
                       isSwitched = value;
-                      _reminder = isSwitched ? 1 : 0;
                     });
                   },
                   inactiveThumbColor:
@@ -194,8 +188,8 @@ class _EditViewBodyState extends State<EditViewBody> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 70,
+             SizedBox(
+              height: height*0.08,
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -230,6 +224,7 @@ class _EditViewBodyState extends State<EditViewBody> {
               4,
                   (index) => Expanded(
                 child: customContainer(
+                  context: context,
                     text: index == 0
                         ? "Daily"
                         : index == 1

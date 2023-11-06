@@ -27,6 +27,8 @@ class _YourTasksState extends State<YourTasks> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return BlocProvider(
         create: (context) {
           debugPrint("Done2");
@@ -48,8 +50,8 @@ class _YourTasksState extends State<YourTasks> {
             },
             color: const Color.fromRGBO(167, 167, 167, 1),
             icon: Container(
-              width: 35,
-              height: 35,
+              width: width*0.08,
+              height: height*0.05,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: const Color.fromRGBO(167, 167, 167, 1))),

@@ -15,6 +15,8 @@ class DescriptionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: AppBar(
@@ -26,8 +28,8 @@ class DescriptionView extends StatelessWidget {
           },
           color: const Color.fromRGBO(167, 167, 167, 1),
           icon: Container(
-            width: 35,
-            height: 35,
+            width: width*0.08,
+            height: height*0.05,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border:
@@ -65,15 +67,15 @@ class DescriptionView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 30,
+                   SizedBox(
+                    height: height*0.035,
                   ),
                   Text(
                     task.title!,
                     style: txtDes1,
                   ),
-                  const SizedBox(
-                    height: 16,
+                   SizedBox(
+                    height: height*0.02,
                   ),
                   Row(
                     children: [
@@ -81,8 +83,8 @@ class DescriptionView extends StatelessWidget {
                         "Due Date",
                         style: txtHint,
                       ),
-                      const SizedBox(
-                        width: 30,
+                       SizedBox(
+                        width: width*0.06,
                       ),
                       Text(
                         task.date!,
@@ -90,8 +92,8 @@ class DescriptionView extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
+                   SizedBox(
+                    height: height*0.02,
                   ),
                   Row(
                     children: [
@@ -99,8 +101,8 @@ class DescriptionView extends StatelessWidget {
                         "Time",
                         style: txtHint,
                       ),
-                      const SizedBox(
-                        width: 30,
+                       SizedBox(
+                        width: width*0.08,
                       ),
                       Text(
                         "${task.startTime} - ${task.endTime}",
@@ -108,8 +110,8 @@ class DescriptionView extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
+                   SizedBox(
+                    height: height*0.02,
                   ),
                   Row(
                     children: [
@@ -117,8 +119,8 @@ class DescriptionView extends StatelessWidget {
                         "Repeat",
                         style: txtHint,
                       ),
-                      const SizedBox(
-                        width: 30,
+                       SizedBox(
+                        width: width*0.08,
                       ),
                       Text(
                         task.repeat == 0? "Daily" : task.repeat == 1? "Weekly" : task.repeat == 2? "Monthly":"None",
@@ -126,15 +128,15 @@ class DescriptionView extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 24,
+                   SizedBox(
+                    height: height*0.03,
                   ),
                   Text(
                     "Description",
                     style: txtOngoing2,
                   ),
-                  const SizedBox(
-                    height: 8,
+                   SizedBox(
+                    height: height*0.02,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 12.0),
