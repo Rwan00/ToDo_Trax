@@ -8,7 +8,7 @@ This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
-- [ToDo Trax "Simple todo app"](assets/images/todo-trax.mp4)
+- [ToDo Trax "Simple todo app_video"](assets/images/todo-trax.mp4)
 
 
 
